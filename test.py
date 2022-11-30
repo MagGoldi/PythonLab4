@@ -1,19 +1,21 @@
-import pandas as pd
+
+# import required libraries
 import numpy as np
+import pandas as pd
+  
+# create a Dataframe
+Mydataframe = pd.read_csv("C:\PYTHON\PythonLab4\dataset_test.csv") #1
+  
+
+print(Mydataframe)
+  
+nan_value = float("NaN")
+Mydataframe.replace(" ", nan_value, inplace=True)
+print(Mydataframe)
+  
+Mydataframe = Mydataframe.dropna()
+print(Mydataframe)
 
 
-df = pd.read_csv("C:\PYTHON\PythonLab4\dataset_test.csv") #1
 
-df.columns =['data', 'temp_day', 'wind', 'pressure_day', 'temp_evening', 'pressure_evening'] #2
-
-df_without_nan = df.dropna()  #3  ( null / None / Nan ) ////
-df = df.dropna() 
-print(df_without_nan)
-
-df1 = df["pressure_evening"].astype("float64")
-
-print('------------------------------')
-print('\nNew Datatypes\n', df.dtypes, sep='') 
-df1 = df.astype("int64", errors='ignore')
-df1.head()
-df1.info()
+  
