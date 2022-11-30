@@ -1,5 +1,15 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
+
+def task6(df: pd.DataFrame, value: float) -> pd.DataFrame:
+    return df.loc[df['temp_day'] >= value]
+
+def task7(df: pd.DataFrame, value1: float, value2: float) -> pd.DataFrame:
+    df =  df.loc[df['temp_day'] >= value1]
+    df =  df.loc[df['temp_day'] <= value2]
+    return df
+
 
 def main() -> None:
 
@@ -23,6 +33,42 @@ def main() -> None:
 
     stats = df[['temp_day', "temp_even", "temp_f_day", "temp_f_even"]].describe()     #5
     print(stats)
+
+    value = 20                             #6
+    df_t6 = task6(df, value)
+    print(df_t6)
+
+    value1, value2 = 15, 23                #7
+    df_t7 = task7(df, value1, value2)
+    print(df_t7)
+
+    #df = df.groupby(['temp_day', 'temp_f_day']).mean()    #8
+    #print(df)
+
+    plt.plot(df['temp_day'])
+    plt.title("Temperature graph in Celsius")  #Fahrenheit temperature graph
+    plt.xlabel("Day")
+    plt.ylabel("Temp")
+    #plt.show()
+
+
+    #define grid of plots
+    fig, axs = plt.subplots(nrows= 2 , ncols= 1 )
+
+    #add title
+    fig. suptitle('Temperature graph')
+
+    #add data to plots
+    axs[0].plot(df['temp_day'])
+    plt.xlabel("Day")
+    plt.ylabel("Temp")
+    axs[1].plot(df['temp_f_day'])
+    plt.show()
+
+    #plt.plot(df['temp_f_day'])
+    #plt.show()
+
+
 
 
 
