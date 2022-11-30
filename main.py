@@ -3,31 +3,26 @@ import numpy as np
 
 def main() -> None:
 
-    df = pd.read_csv("C:\PYTHON\PythonLab4\dataset2.csv") #1
+    df = pd.read_csv("C:\PYTHON\PythonLab4\dataset.csv") #1
 
-    df.columns =['data', 'temp_day', 'wind', 'pressure_day', 'temp_evening', 'pressure_evening'] #2
-
-    df_without_nan = df.dropna()  #3  ( null / None / Nan ) ////
-    df = df.dropna() 
-    print(df_without_nan)
-
-    print('------------------------------')
-    print('\nNew Datatypes\n', df.dtypes, sep='') 
-    df1 = df.astype("int64", errors='ignore')
-    df1.head()
-    df1.info()
-
-    df['temp_day'] = pd.to_numeric(df['temp_day'])
-
-
+    df.columns =['data', 'temp_day', 'wind', 'pressure_day', 'temp_even', 'pressure_even'] #2
     
-    #df = df.astype({'temp_day': np.char})
-    #print(df)
+
+    nan_value = float("NaN")                        #3  ( null / None / Nan ) ////
+    df.replace(" ", nan_value, inplace=True)
+    df = df.dropna()
+    print(df)
 
 
-    #df = df.assign(temp_f_day = df.temp_day +1)
-    #df = df.assign(temp_f_even = df.temp_evening +"1")
-    #print(df)
+    df[['temp_day', "temp_even"]] =  df[['temp_day', "temp_even"]].astype(int)        #4
+    print(df)
+    print(df.dtypes)
+    df = df.assign(temp_f_day = (df.temp_day *9/5) +32, temp_f_even = (df.temp_even*9/5) +32)
+    print(df)
+
+
+    stats = df[['temp_day', "temp_even", "temp_f_day", "temp_f_even"]].describe()     #5
+    print(stats)
 
 
 
