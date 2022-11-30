@@ -49,24 +49,15 @@ def main() -> None:
     plt.title("Temperature graph in Celsius")  #Fahrenheit temperature graph
     plt.xlabel("Day")
     plt.ylabel("Temp")
-    #plt.show()
-
-
-    #define grid of plots
-    fig, axs = plt.subplots(nrows= 2 , ncols= 1 )
-
-    #add title
-    fig. suptitle('Temperature graph')
-
-    #add data to plots
-    axs[0].plot(df['temp_day'])
-    plt.xlabel("Day")
-    plt.ylabel("Temp")
-    axs[1].plot(df['temp_f_day'])
+    plt.plot(df['temp_day'])
     plt.show()
 
-    #plt.plot(df['temp_f_day'])
-    #plt.show()
+    plt.title("Temperature graph in Fahrenheit")
+    plt.xlabel("Day")
+    plt.ylabel("Temp")
+    plt.plot(df['temp_f_day'])
+    plt.show()
+
 
 
 
