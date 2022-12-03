@@ -17,18 +17,14 @@ def task7(df: pd.DataFrame, value1: float, value2: float) -> pd.DataFrame:
 
 def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
     if(month<10): month = "0"+str(month) 
-
     data1 = str(str(year)+"-"+ month +"-"+"01")
     data2 = str(str(year)+"-"+ month +"-"+"31")
 
     df_custom = df.loc[(df['data'] >= data1) & (df['data'] <= data2)]
-    test = df_custom.shape[0]
-    df_custom.index = [i for i in range(0, int(test))]
-   
-      
+    df_custom = index_change(df_custom)
     print(df_custom)  
-    #plt.violinplot(df_custom['temp_day'], showmedians=True)
-    df.median()
+    
+    plt.violinplot(df_custom['temp_day'], showmedians=True)
     plt.plot(df_custom['temp_day'])
     plt.title("Temperature graph in Celsius")  #Fahrenheit temperature graph
     plt.xlabel("Day")
