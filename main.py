@@ -24,12 +24,13 @@ def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
     df_custom = index_change(df_custom)
     print(df_custom)  
     
+    fig3 = plt.figure(figsize=(10, 5))
     plt.violinplot(df_custom['temp_day'], showmedians=True)
-    plt.plot(df_custom['temp_day'])
     plt.title("Temperature graph in Celsius")  #Fahrenheit temperature graph
     plt.xlabel("Day")
     plt.ylabel("Temp")
-    plt.plot(df_custom['temp_day'])
+    plt.plot(df_custom['temp_day'], color="blue", linestyle="--", marker="x", linewidth=1, markersize=4)
+    plt.legend(["Temp in day"])  
     plt.show()
 
 
@@ -72,22 +73,24 @@ def main() -> None:
     df_tmp = df.groupby(['temp_day', 'temp_f_day']).mean()    #8
     print(df_tmp)
 
-    plt.plot(df['temp_day'])
-    plt.title("Temperature graph in Celsius")  #Fahrenheit temperature graph
+
+    fig1 = plt.figure(figsize=(10, 5))
+    plt.title("Temperature graph in Celsius")
     plt.xlabel("Day")
     plt.ylabel("Temp")
-    plt.plot(df['temp_day'])
+    plt.plot(df['temp_day'], color = "green")   
+    plt.legend(["Temp in day"])          
     plt.show()
 
-    plt.title("Temperature graph in Fahrenheit")
+    fig2 = plt.figure(figsize=(10, 5))
+    plt.title("Temperature graph in Fahrenheit")   #Fahrenheit temperature graph
     plt.xlabel("Day")
     plt.ylabel("Temp")
-    plt.plot(df['temp_f_day'])
+    plt.plot(df['temp_day'], color = "red")
+    plt.legend(["Temp in day"])  
     plt.show()
 
 
-    df['data'] =  df['data'].astype(str)  
-    print(df.dtypes)
     month, year = 8, 2021
     custom(df, month, year)
 
