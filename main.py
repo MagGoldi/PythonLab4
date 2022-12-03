@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import datetime
 
-def index_change(df):
-    test = df.shape[0]                              #3.5
+def index_change(df: pd.DataFrame) -> pd.DataFrame:
+    test = df.shape[0]                              
     df.index = [i for i in range(0, int(test))]
     return df
 
@@ -30,10 +30,9 @@ def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
     plt.xlabel("Day")
     plt.ylabel("Temp")
     plt.plot(df_custom['temp_day'], color="blue", linestyle="--", marker="x", linewidth=1, markersize=4)
-    plt.legend(["Temp in day"])  
+    plt.legend(["Temp in day"]) 
+    plt.axhline(y = np.nanmean(df_custom["temp_day"]), color="red", linewidth = 1, label="avg")
     plt.show()
-
-
 
 
 def main() -> None:
@@ -70,9 +69,9 @@ def main() -> None:
     df_t6 = index_change(df_t7)
     print(df_t7)
 
+    df[['temp_day', "temp_even"]] =  df[['temp_day', "temp_even"]].astype(float) 
     df_tmp = df.groupby(['temp_day', 'temp_f_day']).mean()    #8
     print(df_tmp)
-
 
     fig1 = plt.figure(figsize=(10, 5))
     plt.title("Temperature graph in Celsius")
@@ -89,7 +88,6 @@ def main() -> None:
     plt.plot(df['temp_day'], color = "red")
     plt.legend(["Temp in day"])  
     plt.show()
-
 
     month, year = 8, 2021
     custom(df, month, year)
