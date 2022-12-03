@@ -3,6 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import datetime
 
+def index_change(df):
+    test = df.shape[0]                              #3.5
+    df.index = [i for i in range(0, int(test))]
+    return df
+
 def task6(df: pd.DataFrame, value: float) -> pd.DataFrame:
     return df.loc[df['temp_day'] >= value]
 
@@ -22,7 +27,8 @@ def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
    
       
     print(df_custom)  
-    plt.violinplot(df_custom['temp_day'], showmedians=True)
+    #plt.violinplot(df_custom['temp_day'], showmedians=True)
+    df.median()
     plt.plot(df_custom['temp_day'])
     plt.title("Temperature graph in Celsius")  #Fahrenheit temperature graph
     plt.xlabel("Day")
@@ -46,8 +52,7 @@ def main() -> None:
     df = df.dropna()
     print(df)
 
-    test = df.shape[0]                              #3.5
-    df.index = [i for i in range(0, int(test))]
+    df = index_change(df)
     print(df)
 
     df[['temp_day', "temp_even"]] =  df[['temp_day', "temp_even"]].astype(int)        #4
@@ -60,14 +65,16 @@ def main() -> None:
 
     value = 20                             #6
     df_t6 = task6(df, value)
+    df_t6 = index_change(df_t6)
     print(df_t6)
 
     value1, value2 = 15, 23                #7
     df_t7 = task7(df, value1, value2)
+    df_t6 = index_change(df_t7)
     print(df_t7)
 
-    #df = df.groupby(['temp_day', 'temp_f_day']).mean()    #8
-    #print(df)
+    df_tmp = df.groupby(['temp_day', 'temp_f_day']).mean()    #8
+    print(df_tmp)
 
     plt.plot(df['temp_day'])
     plt.title("Temperature graph in Celsius")  #Fahrenheit temperature graph
@@ -87,9 +94,6 @@ def main() -> None:
     print(df.dtypes)
     month, year = 8, 2021
     custom(df, month, year)
-
-
-
 
 
 
