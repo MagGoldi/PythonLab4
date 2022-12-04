@@ -18,7 +18,7 @@ def task6(df: pd.DataFrame, value: float) -> pd.DataFrame:
 def task7(df: pd.DataFrame, value1: float, value2: float) -> pd.DataFrame:
     """sorting DataFrame by value1 and value2"""
     df = df.loc[(df['temp_day'] >= value1) & (df['temp_day'] <= value2)]
-    return df
+    return df 
 
 
 def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
@@ -32,25 +32,25 @@ def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
     print(df_custom)
 
     fig3 = plt.figure(figsize=(10, 5))
-    plt.violinplot(df_custom['temp_day'], showmedians=True)
     plt.title("Temperature graph in Celsius")  # Fahrenheit temperature graph
     plt.xlabel("Day")
     plt.ylabel("Temp")
     plt.plot(df_custom['temp_day'], color="blue", linestyle="--", marker="x", linewidth=1, markersize=4)
-    plt.legend(["Temp in day"])
-    plt.axhline(y=np.nanmean(df_custom["temp_day"]), color="red", linewidth=1, label="avg")
+    plt.axhline(y=np.nanmean(df_custom["temp_day"]), color="red", linewidth=1)
+    plt.axhline(y=np.nanmedian(df_custom["temp_day"]), color="orange",linestyle="-", linewidth=2)
+    plt.legend(["Temp in day", "avg", "median"])
     plt.show()
 
 
 def main() -> None:
     """main function(tra"""
-    df = pd.read_csv("C:\PYTHON\PythonLab4\dataset.csv")  # 1
+    df = pd.read_csv("C:\PYTHON\PythonLab4\dataset.csv")      # 1
     print(df)
 
     df.columns = ['data', 'temp_day', 'wind', 'pressure_day', 'temp_even', 'pressure_even']  # 2
     print(df)
 
-    nan_value = float("NaN")  # 3  ( null / None / Nan ) 
+    nan_value = float("NaN")                             # 3  ( null / None / Nan ) 
     df.replace(" ", nan_value, inplace=True)
     df = df.dropna()
     print(df)
@@ -66,12 +66,12 @@ def main() -> None:
     stats = df[['temp_day', "temp_even", "temp_f_day", "temp_f_even"]].describe()  # 5
     print(stats)
 
-    value = 20  # 6
+    value = 20                  # 6
     df_t6 = task6(df, value)
     df_t6 = index_change(df_t6)
     print(df_t6)
 
-    value1, value2 = 15, 23  # 7
+    value1, value2 = 15, 23     # 7
     df_t7 = task7(df, value1, value2)
     df_t6 = index_change(df_t7)
     print(df_t7)
@@ -80,8 +80,23 @@ def main() -> None:
     df_tmp = df.groupby(['temp_day', 'temp_f_day']).mean()  # 8
     print(df_tmp)
 
+    fig = plt.figure(figsize=(10, 5))
+    ax1=fig.add_subplot(211)
+    ax1.plot(df['temp_day'], color="green")
+    plt.legend(["Temp in day by Celsius"])
+    plt.xlabel("Day")
+    plt.ylabel("Temp")
+
+    ax2=fig.add_subplot(212)
+    ax2.plot(df['temp_day'], color="red")
+    plt.legend(["Temp in day by Fahrenheit"])
+    plt.xlabel("Day")
+    plt.ylabel("Temp")
+    plt.show()
+
+
     fig1 = plt.figure(figsize=(10, 5))
-    plt.title("Temperature graph in Celsius")
+    plt.title("Temperature graph in Celsius")    # Temperature graph in Celsius
     plt.xlabel("Day")
     plt.ylabel("Temp")
     plt.plot(df['temp_day'], color="green")
@@ -98,7 +113,6 @@ def main() -> None:
 
     month, year = 8, 2021
     custom(df, month, year)
-
 
 if __name__ == '__main__':
     main()
