@@ -4,21 +4,25 @@ import matplotlib.pyplot as plt
 
 
 def index_change(df: pd.DataFrame) -> pd.DataFrame:
+    """updating indexes DataFrame"""
     test = df.shape[0]
     df.index = [i for i in range(0, int(test))]
     return df
 
 
 def task6(df: pd.DataFrame, value: float) -> pd.DataFrame:
+    """sorting DataFrame by value"""
     return df.loc[df['temp_day'] >= value]
 
 
 def task7(df: pd.DataFrame, value1: float, value2: float) -> pd.DataFrame:
+    """sorting DataFrame by value1 and value2"""
     df = df.loc[(df['temp_day'] >= value1) & (df['temp_day'] <= value2)]
     return df
 
 
 def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
+    """one month schedule"""
     if (month < 10): month = "0" + str(month)
     data1 = str(str(year) + "-" + month + "-" + "01")
     data2 = str(str(year) + "-" + month + "-" + "31")
@@ -39,6 +43,7 @@ def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
 
 
 def main() -> None:
+    """main function(tra"""
     df = pd.read_csv("C:\PYTHON\PythonLab4\dataset.csv")  # 1
     print(df)
 
