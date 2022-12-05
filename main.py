@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 
 def index_change(df: pd.DataFrame) -> pd.DataFrame:
@@ -42,9 +43,9 @@ def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
     plt.show()
 
 
-def main() -> None:
+def main(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab4", "dataset.csv")) -> None:
     """main function"""
-    df = pd.read_csv("C:\PYTHON\PythonLab4\dataset.csv")      # 1
+    df = pd.read_csv(path_to_csv)      # 1
     print(df)
 
     df.columns = ['data', 'temp_day', 'wind', 'pressure_day', 'temp_even', 'pressure_even']  # 2
@@ -73,11 +74,11 @@ def main() -> None:
 
     value1, value2 = 15, 23     # 7
     df_t7 = task7(df, value1, value2)
-    df_t6 = index_change(df_t7)
+    df_t7 = index_change(df_t7)
     print(df_t7)
 
     df[['temp_day', "temp_even"]] = df[['temp_day', "temp_even"]].astype(float)
-    df_tmp = df.groupby(['temp_day', 'temp_f_day']).mean()  # 8
+    df_tmp = df.groupby(['temp_day', 'temp_f_day']).mean(numeric_only=True)  # 8
     print(df_tmp)
 
     fig = plt.figure(figsize=(10, 5))
