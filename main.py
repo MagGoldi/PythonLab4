@@ -32,7 +32,7 @@ def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
     print(df_custom)
 
     fig3 = plt.figure(figsize=(10, 5))
-    plt.title("Temperature graph in Celsius")  # Fahrenheit temperature graph
+    plt.title("Temperature graph in Celsius by month")  # Fahrenheit temperature graph
     plt.xlabel("Day")
     plt.ylabel("Temp")
     plt.plot(df_custom['temp_day'], color="blue", linestyle="--", marker="x", linewidth=1, markersize=4)
@@ -43,7 +43,7 @@ def custom(df: pd.DataFrame, month: int, year: int) -> pd.DataFrame:
 
 
 def main() -> None:
-    """main function(tra"""
+    """main function"""
     df = pd.read_csv("C:\PYTHON\PythonLab4\dataset.csv")      # 1
     print(df)
 
@@ -87,7 +87,7 @@ def main() -> None:
     plt.xlabel("Day")
     plt.ylabel("Temp")
 
-    ax2=fig.add_subplot(212)
+    ax2 = fig.add_subplot(212)
     ax2.plot(df['temp_day'], color="red")
     plt.legend(["Temp in day by Fahrenheit"])
     plt.xlabel("Day")
