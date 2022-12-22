@@ -16,9 +16,9 @@ def task6(df: pd.DataFrame, value: float) -> pd.DataFrame:
     return df.loc[df['temp_day'] >= value]
 
 
-def task7(df: pd.DataFrame, value1: float, value2: float) -> pd.DataFrame:
-    """sorting DataFrame by value1 and value2"""
-    df = df.loc[(df['temp_day'] >= value1) & (df['temp_day'] <= value2)]
+def task7(df: pd.DataFrame, data1: str, data2: str) -> pd.DataFrame:
+    """sorting DataFrame by data1 and data2"""
+    df= df.loc[(df['data'] >= data1) & (df['data'] <= data2)]
     return df 
 
 
@@ -72,8 +72,9 @@ def main(path_to_csv: str=os.path.join("C:/", "PYTHON", "PythonLab4", "dataset.c
     df_t6 = index_change(df_t6)
     print(df_t6)
 
-    value1, value2 = 15, 23     # 7
-    df_t7 = task7(df, value1, value2)
+    data1 = "2011-01-10"              # 7
+    data2 = "2012-01-10"     
+    df_t7 = task7(df, data1, data2)
     df_t7 = index_change(df_t7)
     print(df_t7)
 
